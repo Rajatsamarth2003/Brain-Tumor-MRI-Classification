@@ -36,6 +36,7 @@ if dark_mode:
         "muted": "#a8b5c7",
         "border": "#334155",
         "accent": "#2dd4bf",
+        "button_text": "#0f172a",
         "header": "#172554",
         "upload": "#172033",
         "notice_bg": "#3b2f16",
@@ -49,6 +50,7 @@ else:
         "muted": "#64748b",
         "border": "#e1e8f0",
         "accent": "#0f766e",
+        "button_text": "#ffffff",
         "header": "#eaf4ff",
         "upload": "#f8fbff",
         "notice_bg": "#fff8e8",
@@ -180,7 +182,22 @@ st.markdown(
         border-radius: 10px;
         font-weight: 600;
         min-height: 42px;
-        border: 1px solid {theme["border"]};
+        color: {theme["button_text"]} !important;
+        background-color: {theme["accent"]} !important;
+        border: 1px solid {theme["accent"]} !important;
+    }}
+
+    .stButton > button:hover,
+    div[data-testid="stFileUploader"] button:hover {{
+        filter: brightness(0.92);
+    }}
+
+    div[data-testid="stFileUploader"] button {{
+        color: {theme["button_text"]} !important;
+        background-color: {theme["accent"]} !important;
+        border: 1px solid {theme["accent"]} !important;
+        border-radius: 8px;
+        font-weight: 600;
     }}
 
     div[data-testid="stProgress"] {{
@@ -299,6 +316,13 @@ except Exception as error:
 # 9. Upload and preview
 # ==========================================
 
+def clear_inputs():
+    st.session_state.pop("mri_prediction", None)
+    st.session_state.pop("mri_upload", None)
+    st.session_state.pop("mri_camera", None)
+    st.session_state.pop("mri_input_method", None)
+
+
 upload_col, preview_col = st.columns(
     [1, 1.2],
     gap="large"
@@ -306,21 +330,36 @@ upload_col, preview_col = st.columns(
 
 with upload_col:
     st.markdown(
-        '<div class="section-label">STEP 01 · UPLOAD IMAGE</div>',
+        '<div class="section-label">STEP 01 · SELECT IMAGE</div>',
         unsafe_allow_html=True
     )
 
-    st.markdown("### Select MRI image")
+    st.markdown("### Choose an MRI image")
 
-    uploaded_file = st.file_uploader(
-        "Choose a JPG, JPEG or PNG image",
-        type=["jpg", "jpeg", "png"],
-        key="mri_upload"
+    input_method = st.radio(
+        "Image source",
+        ["Upload an image", "Take a picture (optional)"],
+        horizontal=True,
+        key="mri_input_method"
     )
 
+    if input_method == "Upload an image":
+        image_file = st.file_uploader(
+            "Choose a JPG, JPEG or PNG image",
+            type=["jpg", "jpeg", "png"],
+            key="mri_upload"
+        )
+        image_caption = "Uploaded MRI image"
+    else:
+        image_file = st.camera_input(
+            "Take a picture of an MRI image",
+            key="mri_camera"
+        )
+        image_caption = "Captured MRI image"
+
     st.caption(
-        "Upload an MRI image for an experimental "
-        "four-class model prediction."
+        "Upload an image or optionally use your camera. "
+        "Camera access is only needed if you choose that option."
     )
 
     st.markdown(
@@ -344,13 +383,13 @@ with preview_col:
 
     st.markdown("### MRI image preview")
 
-    if uploaded_file is not None:
+    if image_file is not None:
         try:
-            image = Image.open(uploaded_file).convert("RGB")
+            image = Image.open(image_file).convert("RGB")
 
             st.image(
                 image,
-                caption="Uploaded MRI image",
+                caption=image_caption,
                 use_container_width=True
             )
 
@@ -373,7 +412,7 @@ with preview_col:
                 <div style="font-size: 55px;">🧠</div>
                 <h3>No image selected</h3>
                 <p style="color: {theme["muted"]};">
-                    Upload an MRI image to preview it here.
+                    Choose an image source to preview an MRI image here.
                 </p>
             </div>
             """,
@@ -396,29 +435,24 @@ with button_col:
         "🔍 Classify MRI",
         type="primary",
         use_container_width=True,
-        disabled=uploaded_file is None
+        disabled=image_file is None
     )
 
 with reset_col:
-    reset_clicked = st.button(
+    st.button(
         "↻ Clear / Reset",
-        use_container_width=True
+        use_container_width=True,
+        on_click=clear_inputs
     )
-
-
-if reset_clicked:
-    st.session_state.pop("mri_prediction", None)
-    st.session_state.pop("mri_upload", None)
-    st.rerun()
 
 
 # ==========================================
 # 11. Predict
 # ==========================================
 
-if classify_clicked and uploaded_file is not None:
+if classify_clicked and image_file is not None:
     try:
-        image = Image.open(uploaded_file).convert("RGB")
+        image = Image.open(image_file).convert("RGB")
         image = image.resize(IMAGE_SIZE)
 
         image_array = np.asarray(

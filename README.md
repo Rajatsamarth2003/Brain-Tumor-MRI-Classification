@@ -69,7 +69,8 @@ may differ.
 ## 🖥️ Application Features
 
 -   Upload a JPG, JPEG, or PNG image.
--   Preview the uploaded image.
+-   Optionally take a picture with the device camera instead of uploading.
+-   Preview the selected or captured image.
 -   View the top predicted dataset class.
 -   View model output scores for all four classes.
 -   Switch between light and dark themes.
