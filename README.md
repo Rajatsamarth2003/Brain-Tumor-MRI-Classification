@@ -1,5 +1,5 @@
 ::: {align="center"}
-#  Brain Tumor MRI Classification
+                    #  Brain Tumor MRI Classification
 
 ### An AI-powered research project for multi-class brain MRI image classification
 
