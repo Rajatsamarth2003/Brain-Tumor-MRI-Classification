@@ -1,5 +1,5 @@
 ::: {align="center"}
-# 🧠 Brain Tumor MRI Classification
+#  Brain Tumor MRI Classification
 
 ### An AI-powered research project for multi-class brain MRI image classification
 
@@ -11,7 +11,7 @@ images into four dataset categories using transfer learning.
 
 ------------------------------------------------------------------------
 
-## ✨ Project Overview
+##  Project Overview
 
 Brain Tumor MRI Classification is an educational deep-learning project
 exploring how convolutional neural networks and transfer learning can
@@ -24,7 +24,7 @@ interface for experimenting with predictions.
 > diagnose, rule out, or make treatment decisions about a medical
 > condition. Consult a qualified medical professional.
 
-## 🎯 Project Goals
+##  Project Goals
 
 -   Inspect and organize a labelled brain MRI dataset.
 -   Resize images to a consistent input size and apply training-time
@@ -35,7 +35,7 @@ interface for experimenting with predictions.
     matrices.
 -   Explore predictions through a Streamlit web interface.
 
-## 🧩 Supported Classes
+##  Supported Classes
 
   Dataset label   Display name
   --------------- --------------
@@ -46,7 +46,7 @@ interface for experimenting with predictions.
 
 These are dataset categories, not confirmed medical findings.
 
-## 🏆 Current Results
+##  Current Results
 
 Results below are from the test-set evaluation output produced during
 this project.
@@ -66,7 +66,7 @@ These results apply only to this project's test set of 246 images. They
 do not establish clinical accuracy, and performance on external images
 may differ.
 
-## 🖥️ Application Features
+##  Application Features
 
 -   Upload a JPG, JPEG, or PNG image.
 -   Optionally take a picture with the device camera instead of uploading.
@@ -80,7 +80,7 @@ may differ.
 The displayed confidence is a model output score, not a calibrated
 probability that a medical diagnosis is correct.
 
-## 🧰 Technology Stack
+##  Technology Stack
 
   Technology             Purpose
   ---------------------- ---------------------------------------
@@ -94,7 +94,7 @@ probability that a medical diagnosis is correct.
   Pandas                 Model comparison CSV
   Streamlit              Interactive web application
 
-## 📁 Project Structure
+##  Project Structure
 
 ``` text
 Brain Tumor MRI Image Classification/
@@ -133,7 +133,7 @@ Brain Tumor MRI Image Classification/
 Dataset files and trained model weights may be stored locally and may
 not be included in a source-code repository.
 
-## ⚙️ Setup and Installation
+##  Setup and Installation
 
 ### 1. Open the project
 
@@ -179,7 +179,7 @@ models/efficientnetb0_fixed.keras
 The dataset should contain `train`, `valid`, and `test` splits, each
 with the four class folders.
 
-## 🚀 Run the Web App
+##  Run the Web App
 
 From the project root:
 
@@ -191,7 +191,7 @@ Streamlit normally opens at `http://localhost:8501`. Upload an MRI image
 and select **Classify MRI** to view the top predicted class and the
 model's output scores.
 
-## 🧪 Train and Evaluate Models
+##  Train and Evaluate Models
 
 Run commands from the project root. Training can take considerable time
 on a CPU.
@@ -242,7 +242,7 @@ This script reconstructs graphs from epoch values entered into the
 script. It is not a substitute for saving training history directly
 during training.
 
-## 🔬 Workflow
+##  Workflow
 
 1.  **Dataset inspection** --- inspect folder structure, classes, image
     dimensions, and class counts.
@@ -260,14 +260,14 @@ during training.
 8.  **Demonstration** --- load the saved EfficientNetB0 checkpoint in
     Streamlit.
 
-## 📊 Evaluation Artifacts
+##  Evaluation Artifacts
 
 -   `results/confusion_matrices/` --- class-by-class prediction counts.
 -   `results/metrics/model_comparison.csv` --- summary metrics for both
     models.
 -   `results/plots/` --- training and validation accuracy/loss graphs.
 
-## 🛠️ Troubleshooting
+##  Troubleshooting
 
 **Model file not found** - Confirm `models/efficientnetb0_fixed.keras`
 exists. - Run Streamlit from the project root.
@@ -289,7 +289,7 @@ previously recorded epoch values.
 loaded, the class order matches the training folder mapping, and
 preprocessing matches the successful training/evaluation pipeline.
 
-## 🔐 Data, Ethics, and Limitations
+##  Data, Ethics, and Limitations
 
 -   Use only data you are authorized to access and share.
 -   Do not upload identifiable or sensitive medical images to a public
@@ -300,7 +300,7 @@ preprocessing matches the successful training/evaluation pipeline.
 -   This project is for learning and research, not clinical
     decision-making.
 
-## 🗺️ Future Improvements
+##  Future Improvements
 
 -   Save training histories automatically for every experiment.
 -   Add automated tests for preprocessing, model loading, and prediction
@@ -313,7 +313,7 @@ preprocessing matches the successful training/evaluation pipeline.
 -   Consider calibration and robust external validation before making
     claims beyond this dataset.
 
-## 👩‍💻 Project Details
+##  Project Details
 
 **Project:** Brain Tumor MRI Classification\
 **Focus:** Deep Learning · Computer Vision · Transfer Learning · Model
@@ -322,5 +322,5 @@ Evaluation · Streamlit
 ------------------------------------------------------------------------
 
 ::: {align="center"}
-**Built for learning, experimentation, and responsible AI.** 🧠
+**Built for learning, experimentation, and responsible AI.** 
 :::
